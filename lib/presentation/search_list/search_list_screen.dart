@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_search_app_1/data/model/photo.dart';
+import 'package:image_search_app_1/presentation/search_list/components/image_card_widget.dart';
 import 'package:image_search_app_1/presentation/search_list/search_list_view_model.dart';
 import 'package:provider/provider.dart';
 
 class SearchListScreen extends StatefulWidget {
-  SearchListScreen({super.key});
+  const SearchListScreen({super.key});
 
   @override
   State<SearchListScreen> createState() => _SearchListScreenState();
@@ -53,13 +54,7 @@ class _SearchListScreenState extends State<SearchListScreen> {
                       mainAxisSpacing: 10,
                       crossAxisCount: 2,
                       children: viewModel.photos
-                          .map((e) => ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: Image.network(
-                                  e.url,
-                                  fit: BoxFit.cover,
-                                ),
-                              ))
+                          .map((e) => ImageCardWidget(photo: e))
                           .toList(),
                     ),
             ),
