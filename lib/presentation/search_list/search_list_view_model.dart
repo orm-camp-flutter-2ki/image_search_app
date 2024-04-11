@@ -14,8 +14,16 @@ class SearchListViewModel with ChangeNotifier {
 
   List<Photo> get photos => List.unmodifiable(_photos);
 
+  bool _isLoading = false;
+
+  bool get isLoading => _isLoading;
+
   void onSearch(String query) async {
+    _isLoading = true;
+    notifyListeners();
+
     _photos = await _photoRepository.getPhotos(query);
+    _isLoading = false;
     notifyListeners();
   }
 }
