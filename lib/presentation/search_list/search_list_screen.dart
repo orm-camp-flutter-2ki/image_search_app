@@ -31,6 +31,7 @@ class _SearchListScreenState extends State<SearchListScreen> {
       body: Column(
         children: [
           TextField(
+            controller: _queryTextEditingController,
             decoration: InputDecoration(
               border: const OutlineInputBorder(),
               hintText: '검색어',
