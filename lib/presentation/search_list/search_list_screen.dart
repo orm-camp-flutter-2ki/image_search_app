@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_search_app_1/data/model/photo.dart';
 import 'package:image_search_app_1/presentation/search_list/components/image_card_widget.dart';
 import 'package:image_search_app_1/presentation/search_list/search_list_view_model.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +22,7 @@ class _SearchListScreenState extends State<SearchListScreen> {
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<SearchListViewModel>();
+    final state = viewModel.state;
 
     return Scaffold(
       appBar: AppBar(
@@ -47,13 +46,13 @@ class _SearchListScreenState extends State<SearchListScreen> {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(10.0),
-              child: viewModel.isLoading
+              child: state.isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : GridView.count(
                       crossAxisSpacing: 10,
                       mainAxisSpacing: 10,
                       crossAxisCount: 2,
-                      children: viewModel.photos
+                      children: state.photos
                           .map((e) => ImageCardWidget(photo: e))
                           .toList(),
                     ),
