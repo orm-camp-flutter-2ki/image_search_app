@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:image_search_app_1/presentation/photo_detail/photo_detail_screen.dart';
 import 'package:image_search_app_1/presentation/search_list/components/image_card_widget.dart';
 import 'package:image_search_app_1/presentation/search_list/search_list_view_model.dart';
 import 'package:provider/provider.dart';
@@ -54,7 +55,23 @@ class _SearchListScreenState extends State<SearchListScreen> {
                       mainAxisSpacing: 10,
                       crossAxisCount: 2,
                       children: state.photos
-                          .map((e) => ImageCardWidget(photo: e))
+                          .map(
+                            (photo) => GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        PhotoDetailScreen(photo: photo),
+                                  ),
+                                );
+                              },
+                              child: Hero(
+                                tag: photo.id,
+                                child: ImageCardWidget(photo: photo),
+                              ),
+                            ),
+                          )
                           .toList(),
                     ),
             ),
